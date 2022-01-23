@@ -7,10 +7,10 @@ referência.  */
 
 #include <stdio.h>
 
-int concatena(char* s1, char* s2, char* sres, int* espacos){
+int concatena(char* s1, char* s2, char* sres, int* espacos, int tamanho){
 	int i,j;
 	*espacos=1;
-	
+	tamanho=0;
 	for(i=0; i<40;i++){
 		if(s1[i]==' '){
 			*espacos=*espacos+1;
@@ -20,6 +20,7 @@ int concatena(char* s1, char* s2, char* sres, int* espacos){
 			break;		
 		sres[i]=s1[i];
 		
+		tamanho++;
 	}
 
 	sres[i-1]=' ';
@@ -33,10 +34,12 @@ int concatena(char* s1, char* s2, char* sres, int* espacos){
 			break;
 		}
 		i++;
+		tamanho++;
+
 	}
 	
 	sres[i-1]='\0';	
-
+	return tamanho;
 }
 
 //Funcao para imprimir uma string
@@ -59,7 +62,7 @@ int main(int argc, char * argv[]){
   fgets(frase1, 40, stdin);
   fgets(frase2, 40, stdin);
   
-  tamResultado = concatena(frase1, frase2, fraseResultado, &espacos);
+  tamResultado = concatena(frase1, frase2, fraseResultado, &espacos,tamResultado);
   
   print_string(fraseResultado);
   printf("String com %d caracteres e %d espacos.\n", tamResultado, espacos);
